@@ -1,0 +1,118 @@
+//Task1_a
+public class Task1_a{
+  public static void main(String[] arg){
+    
+    int i =24;
+    while(i>=-6){
+      System.out.print(i +" ");
+      i = i - 6;
+    }
+  }
+}
+
+//Task1_b
+public class Task1_b{
+  public static void main(String[] arg){
+    
+  int i = -10;
+  while(i<= 20)
+  {
+    System.out.print(i +" ");
+    i = i + 5;
+  }  
+ }
+}
+
+
+//Task2
+import java.util.Scanner;
+public class Task2{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter a number:");
+    int num1 = sc.nextInt();
+    int sum = 0;
+    double avg = 0;
+    for(int i = 1; i<=num1;i++){
+    System.out.println(i);
+      sum = sum + i;
+     
+    }
+    System.out.println("The sum of " + num1 + " no is: " + sum);
+    avg =sum/num1;
+    System.out.println("The Average is: " + avg);
+  }
+}
+
+
+//Task3
+ import java.util.Scanner;
+ public class Task3{
+   public static void main(String[] args){
+     Scanner sc = new Scanner(System.in);
+     int num1=0;
+    while(num1>=0){
+    System.out.println("Please enter a number:");
+     num1 = sc.nextInt();
+     if(num1>0){
+ num1= num1*num1;
+ System.out.println(num1);}
+     else{
+       break;}
+  }
+ }
+}
+ 
+
+//Fun
+ import java.util.Scanner;
+ public class Task3{
+   public static void main(String[] args){
+     Scanner sc = new Scanner(System.in);
+     int poscount = 0;
+     int negcount = 0;
+     int i=0;
+     while(i>=0){
+    System.out.println("Enter an integer:");
+     int num1 = sc.nextInt();
+     if(num1>=0){
+     poscount++;
+     System.out.println(poscount + "Non-negative Numbers");
+      }
+       else{
+     negcount++;
+     System.out.println(negcount + "Negative Numbers");}
+   }
+ }
+}
+ 
+//Task5
+ import java.util.Scanner;
+ public class Task3{
+   public static void main(String[] args){
+     Scanner sc = new Scanner(System.in);
+     int poscount = 0;
+     int negcount = 0;
+     System.out.println("Enter an integer");
+     int howmuch = sc.nextInt();
+     int i = 0 ;
+     while(i<=howmuch){
+       howmuch++;
+       System.out.println("Enter an integer " + howmuch);
+       int num1 = sc.nextInt();
+       
+     if(num1>=0){
+     poscount++;
+     System.out.println(poscount + "Non-negative Numbers");
+      }
+       else{
+     negcount++;
+     System.out.println(negcount + "Negative Numbers");}
+   }
+     }
+    
+   }
+ 
+
+ 
+ 
