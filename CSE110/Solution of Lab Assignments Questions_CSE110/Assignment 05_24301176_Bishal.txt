@@ -1,0 +1,244 @@
+import java.util.Scanner;
+public class Task1{
+  public static void main(String[] args){
+  Scanner sc = new Scanner(System.in);
+  int num = sc.nextInt();
+  int result=0,count=0,pcount=0;
+  if(num==0)
+  {
+    System.out.println("zero sol");
+  }
+  else if(num>0)
+  {
+    for(int i = 2; i>1; i++)
+    {
+      for(int j = 1; j<=i; j++)
+      {
+        result = i%j;
+          if(result==0)
+            {
+              count++;
+            }
+          else{result = 0;}
+       }
+          if(count==2)
+            {
+             System.out.println(i);
+             pcount++;
+            }
+         count =0;
+         result=0;
+      
+          if(pcount==num)
+          {
+            break;
+          }
+      }
+    }
+  else
+  {
+   System.out.println("Invalid Input");
+  }
+ }
+}
+
+---------------------------------------------------------------------
+
+
+
+import java.util.Scanner;
+public class Task2{
+  public static void main(String[] args){
+   Scanner sc = new Scanner(System.in);
+   int num = sc.nextInt();
+   int sum=0,result=0;
+   for(int i = 1; i <=num; i++)
+    {
+     for(int j = 1; j<=i; j++)
+     {
+     sum = sum + j;
+     }
+    }
+   result = -sum;
+  System.out.println(result);
+  }
+
+}
+
+
+
+
+----------------------------------------------------------
+import java.util.Scanner;
+public class Task3{
+  public static void main(String[] args)
+   {
+    int num =0,result=0, count=0;
+     Scanner sc = new Scanner(System.in);
+     while(true)
+     { 
+       System.out.println("Enter Number: ");
+       num = sc.nextInt();
+       if(num%2==0){
+          for(int i = 1; i<=num; i++)
+          {
+          result= num%i;
+            if(result==0)
+            { 
+             count++;
+            }
+            else
+            {
+              result=0;
+            }
+          }
+          System.out.println(num + " has " + count + " divisors");
+          count=0;
+          
+       }
+       else
+       {
+         break;
+       }
+     }
+   }
+ }
+
+----------------------------------------------------------
+import java.util.Scanner;
+public class Task4
+{
+  public static void main(String[] args)
+  {
+    Scanner sc = new Scanner(System.in);
+    int loop = sc.nextInt();
+    int numX=0, numY=0,sum=0;
+    for(int i = 1; i<= loop ; i++)
+    {
+    sum=0;
+    numX = sc.nextInt();
+    numY = sc.nextInt();
+    
+    if(numX%2==0)
+    {
+      for(int j = 1; j<=numY; j++)
+      {
+      sum=sum+(numX+ 2*j-1);
+      }
+    
+    }
+    else
+     {
+      for(int k = 0 ; k< numY; k++ )
+      {
+     sum = sum + (numX+ 2*k);
+      }
+     }
+    System.out.println(sum);
+    }
+  }
+  
+}
+
+---------------------------------------------------------
+
+import java.util.Scanner;
+public class Task5{
+  public static void main(String[] args)
+  {
+  Scanner sc = new Scanner(System.in);
+   int length = sc.nextInt();
+   int width = sc.nextInt();
+   
+   for(int i = 1; i<= width; i++)
+   {
+     for(int j = 1 ; j<= length ; j++)
+     {
+      System.out.print(j+ " ");
+     }
+     System.out.println();
+   }
+  }
+}
+
+
+----------------------------------------------------------
+
+import java.util.Scanner;
+public class Task6{
+  public static void main(String[] args)
+  {
+  Scanner sc = new Scanner(System.in);
+  int rowCol = sc.nextInt();
+  
+  for(int rowCount = 1 ; rowCount<= rowCol ; rowCount++)
+  {
+   for(int spCount = 1; spCount<= rowCol-rowCount; spCount++)
+    {
+      System.out.print(" ");
+    }
+    for(int colCount = 1; colCount<=rowCount; colCount++ )
+    { 
+       System.out.print(colCount);
+    }
+    System.out.println(" ");
+  }
+ }
+}
+
+
+-----------------------------------------------------------
+import java.util.Scanner;
+ public class Task7
+ {
+   public static void main(String[] args)
+   {
+   Scanner sc = new Scanner(System.in);
+   int height = sc.nextInt();
+   
+   for(int rowcount=1; rowcount<= height; rowcount++)
+   {
+     for(int spcount=1; spcount<=height-rowcount; spcount++)
+     {
+      System.out.print(" ");
+     }
+   for(int colcount = 1; colcount<=2*rowcount-1; colcount++)
+    {
+      System.out.print(colcount);
+    }
+   System.out.println();
+   }
+  }
+}
+
+
+-------------------------------------------------------------
+
+import java.util.Scanner;
+public class Task8
+{
+  public static void main(String[] args)
+  {
+   Scanner sc = new Scanner(System.in);
+   int Snum =sc.nextInt();
+   int Fnum = sc.nextInt();
+   int sum=0, result=0, store=0;
+    System.out.println("Armstrong numbers:");
+   for(int start=Snum; start<=Fnum; start++)  
+   {
+     store = start;
+    while(store!=0)
+     {
+      result = store%10;
+      store = store/10;
+      sum = sum+ (int)Math.pow(result,3);
+     }
+    if(start==sum)
+    {
+        System.out.println(sum);
+    }
+    result=0;
+    sum=0;
+   }
+  }
+}
