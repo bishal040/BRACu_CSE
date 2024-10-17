@@ -1,0 +1,365 @@
+import java.util.Scanner;
+public class Task1
+{
+  public static void main(String[] args)
+  {
+    Scanner sc = new Scanner(System.in);
+   
+    String str = sc.nextLine();
+    String newstr ="";
+  for(int i=0;i<str.length();i++)
+  {
+    char ch = str.charAt(i);
+    if(ch>='a' && ch<='z'){
+      newstr +=(char)(ch-32);
+  }
+    else
+    {
+    newstr+=(char)ch;
+    }
+  }
+  System.out.println(newstr);
+}
+}
+
+-----------------------------------------------------------------------
+import java.util.Scanner;
+public class Task2{
+  public static void main(String[] args)
+  {
+   Scanner sc = new Scanner(System.in);
+   String str = sc.nextLine();
+    String chk = "";
+   for(int i=str.length()-1;i>=0;i--)
+   {
+     char ch= str.charAt(i);
+     chk += ch;
+   }
+   if(chk.equals(str))
+   {
+     System.out.println(true);
+   }
+   else
+   {
+     System.out.println(false);
+   }
+  }
+}
+-----------------------------------------------------------------------
+import java.util.Scanner;
+public class Task3
+{
+  public static void main(String[] args)
+  {
+   Scanner sc = new Scanner(System.in);
+     String str1= sc.nextLine();
+     String str2 =sc.next();
+     String newstr ="";
+     char Emptystr=' ';
+     char ch = str2.charAt(0);
+     for(int i=0;i<str1.length();i++)  
+     {
+       
+       if(str1.charAt(i)==ch)
+       {
+         System.out.println(newstr);
+         newstr="";
+         
+       }
+       else
+       {
+        newstr +=str1.charAt(i);
+       }
+     }
+System.out.println(newstr);
+  }
+}
+-------------------------------------------------------------------
+import java.util.Scanner;
+public class Task4
+{
+  public static void main(String[] args)
+  {
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    String rev = "";
+    for(int i = str.length()-1;i>=0;i--)
+    {
+      char ch = str.charAt(i);
+      rev += ch;
+    }
+    System.out.println(rev);
+  }
+}
+-------------------------------------------------------------------
+import java.util.Scanner;
+public class Task5
+{
+  public static void main(String[] args)
+  {
+    Scanner sc = new Scanner(System.in);
+    String str= sc.nextLine();
+    int vowCount=0,conCount=0;
+    for(int i = 0;i<str.length();i++)
+    {
+      char ch = str.charAt(i);
+      if(ch=='a' ||
+         ch=='e' ||
+         ch=='i' ||
+         ch=='o' ||
+         ch=='u' ||
+         ch=='A' ||
+         ch=='E' ||
+         ch=='I' ||
+         ch=='O' ||
+         ch=='U'  )
+      {
+        vowCount++;
+      }
+      else if(ch>'a' && ch<='z' || ch>'A' && ch<='Z')
+      {
+        conCount++;
+      }
+    }
+    if(vowCount%3==0 && conCount%5==0 && vowCount>0 && conCount>0)
+    {
+      System.out.println("Aaarr! Me Plunder!!");
+    }
+    else
+    {
+      System.out.println("Blimey! No Plunder!!");
+    }
+  }
+}
+------------------------------------------------------------------
+import java.util.Scanner;
+public class Task6{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    String wordRev = "";
+    String word = "";
+    String sentence ="";
+    for(int i = str.length()-1;i>=0;i--)
+    {
+      char ch = str.charAt(i);
+      if(ch==' ')
+      {
+        for(int j=wordRev.length()-1;j>=0;j--)
+        {
+          char ch1 = wordRev.charAt(j);
+        word += ch1;
+        }
+        sentence += word + " ";
+        wordRev="";
+        word="";
+      }
+      else
+      {
+        wordRev+=ch;
+      }
+    }
+    for(int k=wordRev.length()-1;k>=0;k--)
+    {
+      char ch2 = wordRev.charAt(k);
+      word += ch2;
+    }
+    sentence += word;
+    System.out.println(sentence);
+  }
+}
+
+------------------------------------------------------------------
+import java.util.Scanner;
+public class Task7{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    String str1 = sc.nextLine();
+    boolean flag = true;
+    String word = "";
+    for(int i = 0;i<str.length();i++)
+    {
+      flag = true;
+      for(int j = 0; j<str1.length();j++)
+      {
+        if(str.charAt(i)==str1.charAt(j))
+        {
+          flag =false;
+          break;
+        }
+      }
+      if(flag)
+      {
+        char ch = str.charAt(i);
+        word +=(char)(ch-32) ;
+      }
+    }
+    
+    for(int i=0;i<str1.length();i++)
+    {
+      flag = true;
+      for(int j=0;j<str.length();j++)
+      {
+        if(str1.charAt(i)==str.charAt(j))
+        {
+          flag = false;
+          break;
+        }
+        
+      }
+      if(flag)
+      {
+        char ch1 = str1.charAt(i);
+        word += (char)(ch1-32);
+      }
+    }
+    System.out.println(word);
+  }
+}
+
+-------------------------------------------------------------------
+import java.util.Scanner;
+public class Task8
+{
+  public static void main(String[] args)
+  {
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    int spaceCount=0;
+    String result = "";
+    for(int i = 0;i<str.length();i++)
+    {
+      char ch = str.charAt(i);
+      if(ch>=' ' && ch<='/')
+      {
+        spaceCount++;
+        result+=ch;
+      }
+      if(spaceCount%2==0)
+      {
+        if(i%2==0)
+        {
+          if(ch>='a' && ch<='z')
+          {
+            result+=ch;
+          }
+          else if(ch>='A' && ch<='Z')
+          {
+            result+=(char)(ch+32);
+          }
+        }
+        else if(i%2==1)
+        {
+          if(ch>='a' && ch<='z')
+          {
+            result+=(char)(ch-32);
+          }
+          else if(ch>='A' && ch<='Z')
+          {
+            result+=ch;
+          }
+        } 
+      }
+      else
+      {
+        if(i%2==1)
+        {
+          if(ch>='a' && ch<='z')
+          {
+            result+=ch;
+          }
+          else if(ch>='A' && ch<='Z')
+          {
+            result+=(char)(ch+32);
+          }
+        }
+        else if(i%2==0)
+        {
+          if(ch>='a' && ch<='z')
+          {
+            result+=(char)(ch-32);
+          }
+          else if(ch>='A' && ch<='Z')
+          {
+            result+=ch;
+          }
+        } 
+      }
+    }
+    System.out.println(result);
+  }
+}
+
+-------------------------------------------------------------------
+import java.util.Scanner;
+public class Task9{
+  public static void main(String[] args)
+  {
+    Scanner sc= new Scanner(System.in);
+    String password = sc.nextLine();
+    boolean flag=false;
+    boolean u =false;
+    boolean l =false;
+    boolean n =false;
+    boolean sp =false;
+    boolean d =false;
+    if(password.length()<8)
+    {
+      System.out.println(flag);
+    }
+    else
+    {
+      for(int i=0;i<password.length();i++)
+      {
+        if(!u)
+        {
+          if(password.charAt(i)>='a' && password.charAt(i)<='z')
+          {
+            u = true;
+          }
+        }
+        if(!l)
+        {
+          if(password.charAt(i)>='A' && password.charAt(i)<='Z')
+          {
+            l=true;
+          }
+        }
+        if(!n)
+        {
+          if(password.charAt(i)>='0' && password.charAt(i)<='9')
+          {
+            n=true;
+          }
+        }
+        if(!sp)
+        {
+          if(password.charAt(i)>=' ' && password.charAt(i)<='/' || 
+             password.charAt(i)>=':' && password.charAt(i)<='@' || 
+             password.charAt(i)>='[' && password.charAt(i)<='`' || 
+             password.charAt(i)>='{' && password.charAt(i)<='_')
+          {
+            sp=true;
+          }
+        }
+        if(i<password.length()-1 && password.charAt(i)==password.charAt(i+1))
+        {
+         d=d;
+        }
+        else
+        {
+        d=!d;
+        }
+      }
+      if(u && l && n && sp && d)
+      {
+        System.out.println(!flag);
+      }
+      else
+      {
+        System.out.println(flag);
+      }
+    }
+  }
+}
