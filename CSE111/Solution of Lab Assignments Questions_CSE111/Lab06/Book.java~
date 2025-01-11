@@ -1,0 +1,19 @@
+public Book{
+//  static int total_books_sold;
+//  static double total_revenue;
+//  private double price = 150;
+//  private String title;
+//  
+//  public Book(String title,int discount){
+//    this.title = title;
+//    calcDiscount(discount);
+//    this.price = this.price-(discount/100.0)*this.price;
+//    
+//  }
+//  public void
+//  public void bookDetails(){
+//    //System.out.printf("Total Books Sold: %d\nTotal Revenue: %,.1f TK",this.total_book);
+//    System.out.printf("Title: %s\nPrice after Discount: %d",this.title,total_books_sold);
+//  }
+//  
+}
