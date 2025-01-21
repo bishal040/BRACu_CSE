@@ -1,0 +1,39 @@
+public class CellPhone
+{
+  public String model ="unknown";
+  public int count = 0;
+  public String[] contact = new String[3];
+  public void printDetails()
+  {
+  System.out.println("Phone Model " + this.model);
+  if(count==0)
+  {
+    System.out.println("Contacts Stored " + count);
+  }
+  else
+  {
+    System.out.println("Contacts Stored " + count);
+    System.out.println("Stored Contacts: ");
+    for(int i = 0;i<contact.length;i++)
+    {
+      if(contact[count].equals(null))
+      {
+    System.out.println(contact[count]);
+      }
+    }
+  }
+  }
+  public String storeContact(String str)
+  {
+    if(count<=2)
+    {
+      contact[count]= str;
+      System.out.println("Contact Stored");
+    }
+    else
+    {
+      System.out.println("Memory full. New contact can't be
+stored. ");
+    }
+  }
+}

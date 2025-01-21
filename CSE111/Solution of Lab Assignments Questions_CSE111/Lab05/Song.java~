@@ -1,0 +1,6 @@
+public class Song{
+  public String name;
+  public String artistName;
+  public int time;
+  public Song next;s
+}
