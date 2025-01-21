@@ -1,0 +1,774 @@
+//Task01
+
+public class Person{
+    private String name;
+    private int age;
+    private String type;
+    private Vaccine vaccine;
+    boolean firstDose,secondDose;
+
+    public Person(String name, int age, String type) {
+        this.name = name;
+        this.age = age;
+        this.type = type;
+    }
+    public Person(String name, int age) {
+        this(name,age,"General Citizen");
+    }
+    public void showDetail() {
+        System.out.printf("Name: %s Age: %d Type: %s\n",name,age,type );
+        System.out.println("Vaccine name:" + vaccine.getName());
+        System.out.println("1st dose: " + (firstDose? "Given":"Not Given" ));
+        System.out.println("2nd dose: "+ (secondDose?"Given":("Please come after " + vaccine.getRevisit() + " days")));
+    }
+    public void pushVaccine(Vaccine v) {
+        this.pushVaccine(v,"1st Dose");
+    }
+    public void pushVaccine(Vaccine v,String dose) {
+        if(dose.equals("1st Dose")) {
+            vaccine = v;
+            if(!firstDose) {
+                if(type.equals("Student") || age>=25) {
+                    firstDose = true;
+                    System.out.println("1st dose done for " + name);
+                }
+                else {
+                    System.out.printf("Sorry %s, Minimum age for taking vaccines is 25 years now.\n",name);
+                }
+            }
+            else {
+                System.out.println("Already 1st Dose Done");
+            }
+        }
+        else {
+            if(!secondDose) {
+                if(vaccine == null || !vaccine.getName().equals(v.getName())) {
+                    System.out.printf("Sorry %s, you can't take 2 different vaccines.\n",name);
+                }
+                else{
+                    secondDose = true;
+                    System.out.println("2nd dose done for "+ name);
+                }
+            }
+            else{
+                System.out.printf("Sorry %s, you already received both doses\n",name);
+            }
+        }
+    }
+}
+
+public class Vaccine {
+ private String name;
+ private String origin;
+ private int revisit;
+
+public Vaccine(String name,String origin,int revisit) {
+    this.name = name;
+    this.origin = origin;
+    this.revisit = revisit;
+}
+public Vaccine(Vaccine v) {
+    this(v.name,v.origin,v.revisit);
+}
+public String getName() {
+    return name;
+}
+public String getOrigin() {
+    return origin;
+}
+public int getRevisit() {
+    return revisit;
+}
+}
+
+public class VaccineTester {
+    public static void main(String[] args) {
+      Vaccine astra = new Vaccine("AstraZeneca", "UK", 60);
+      Vaccine modr = new Vaccine("Moderna", "UK", 30);
+      Vaccine sin = new Vaccine("Sinopharm", "China", 30);
+  
+      Person p1 = new Person("Bob", 21, "Student");
+      System.out.println("=================");
+      p1.pushVaccine(astra);
+      System.out.println("=================");
+      p1.showDetail();
+      System.out.println("=================");
+      p1.pushVaccine(sin, "2nd Dose");
+      System.out.println("=================");
+      p1.pushVaccine(astra, "2nd Dose");
+      System.out.println("=================");
+      p1.showDetail();
+      System.out.println("=================");
+      p1.pushVaccine(astra, "2nd Dose");
+      System.out.println("=================");
+      p1.showDetail();
+      System.out.println("=================");
+  
+      Person p2 = new Person("Carol", 23, "Actor");
+      System.out.println("=================");
+      p2.pushVaccine(sin);
+      System.out.println("=================");
+  
+      Person p3 = new Person("David", 34);
+      System.out.println("=================");
+      p3.pushVaccine(modr, "2nd Dose");
+      System.out.println("=================");
+      p3.pushVaccine(modr, "1st Dose");
+      System.out.println("=================");
+      p3.showDetail();
+      System.out.println("=================");
+      p3.pushVaccine(modr, "2nd Dose");
+    }
+  }
+  
+//Task02
+
+package Task2;
+
+public class NikeBD {
+    public int brance,jordan,cortez,kobe,sold;
+    public static int brance1,jordan1,cortez1,kobe1,sold1;
+    public String name;
+
+    public NikeBD(String name) {
+        this.name = name;
+        brance1++;
+    }
+    public void restockProducts(String name, int qnt) {
+        switch(name) {
+            case "Jordan":
+            jordan+=qnt;
+            jordan1+=qnt;
+            break;
+            case "Cortez":
+            cortez+=qnt;
+            cortez1+=qnt;
+            break;
+            case "Kobe":
+            kobe+=qnt;
+            kobe1+=qnt;
+            break;
+            default: System.out.println("Invalid Product name");
+        }
+    }
+    public void restockProducts(String[] name, int[] qnt) {
+        for(int i = 0;i<=name.length-1;i++)
+        {
+            this.restockProducts(name[i],qnt[i]);
+        }
+    }
+    public static void status() {
+        System.out.println("Nike Bangladesh Status:");
+        System.out.println("Branches Opened: " + brance1);
+        System.out.printf("Currently Stocked: Jordan: %d, Cortez: %d, Kobe: %d\n",jordan1,cortez1,kobe1);
+        System.out.println("Sold: " + sold1);
+    }
+    public void details() {
+        System.out.printf("Nike %s outlet:\nProcuts Currently Stocked: Jordan: %d,Cortez: %d, Kobe: %d\nSold: %d\n",name,jordan,cortez,kobe,sold);
+    }
+    public void productSold(String name, int qnt) {
+        switch(name) {
+            case "Jordan":
+                if(jordan-qnt>=0) {
+                    jordan-=qnt;
+                    sold+=qnt;
+                    jordan1-=qnt;
+                    sold1+=qnt;
+                }
+            break;
+            case "Cortez":
+                if(cortez-qnt>=0) {
+                    cortez-=qnt;
+                    sold+=qnt;
+                    cortez1-=qnt;
+                    sold1+=qnt;
+                }
+                break;
+            case "Kobe":
+                if(kobe-qnt>=0) {
+                    kobe-=qnt;
+                    sold+=qnt;
+                    kobe1-=qnt;
+                    sold1+=qnt;
+                }
+                break;
+        default: System.out.println("Invalid Product Name.");
+    }
+    }
+    public void productSold(String name1,int qnt1,String name2, int qnt2) {
+        this.productSold(name1,qnt1);
+        this.productSold(name2,qnt2);
+    }
+}
+
+package Task2;
+
+public class NikeTester {
+    public static void main(String[] args) {
+      System.out.println("==========1==========");
+      NikeBD.status();
+      NikeBD dhaka = new NikeBD("Dhaka Banani");
+      NikeBD chittagong = new NikeBD("Chittagong GEC");
+      System.out.println("==========2==========");
+      dhaka.details();
+      System.out.println("==========3==========");
+      chittagong.details();
+      System.out.println("==========4==========");
+      dhaka.restockProducts("Jordan", 200);
+      System.out.println("==========5==========");
+      String [] products = {"Jordan", "Cortez", "Kobe"};
+      int [] qty = {1200, 200, 200};
+      String [] products2 = {"Jordan", "Cortez", "Kobe"};
+      int [] qty2 = {1200, 250, 100};
+      dhaka.restockProducts(products, qty);
+      System.out.println("==========6==========");
+      chittagong.restockProducts(products2, qty2);
+      System.out.println("==========7==========");
+      NikeBD.status();
+      System.out.println("==========8==========");
+      dhaka.details();
+      System.out.println("==========9==========");
+      chittagong.details();
+      dhaka.productSold("Jordan", 760, "Cortez", 90);
+      chittagong.productSold("Jordan", 520, "Kobe", 70);
+      System.out.println("==========10==========");
+      NikeBD.status();
+      System.out.println("==========11==========");
+      chittagong.details();
+    }
+  }
+  
+
+//Task03
+
+package Task3;
+
+public class Defender extends Football{
+    public int tackle,intercept;
+    public double performance;
+    public Defender(String name,int age,int stamina, int tackle,int intercept) {
+        super(name,age,stamina);
+        this.tackle = tackle;
+        this.intercept = intercept;
+    }
+    @Override
+    public void calculatePerformance() {
+        performance = (double)intercept/tackle;
+        System.out.println("Performance: " + performance);
+    }
+    public void display() {
+        super.display();
+        System.out.printf("Goals: %d\nInterceptions: %d\n",tackle,intercept);
+    }
+}
+
+package Task3;
+
+public class Football {
+    public String name;
+public int age;
+public int stamina;
+public Football(String name, int age, int stamina) {
+this.name = name;
+this.age = age;
+this.stamina = stamina;
+}
+public void display() {
+System.out.println("Name: " + name);
+System.out.println("Age: " + age);
+System.out.println("Stamina: " + stamina);
+}
+public void calculatePerformance() {
+System.out.println("Performance is not defined yet");
+}
+}
+
+package Task3;
+
+public class FootballTester {
+    public static void main(String[] args) {
+        Striker ronaldo = new Striker("Ronaldo", 39, 90, 901, 1000);
+        Defender ramos = new Defender("Ramos", 38, 85, 1000, 100);
+        System.out.println("1========");
+        ronaldo.display();
+        System.out.println("2========");
+        ronaldo.calculatePerformance();
+        System.out.println("3========");
+        ramos.display();
+        System.out.println("4========");
+        ramos.calculatePerformance();
+        }
+}
+
+package Task3;
+
+public class Striker extends Football{
+    public int goals,shotOnTarget;
+    public double performance;
+    public Striker(String name,int age,int stamina, int goals,int shotOnTarget) {
+        super(name,age,stamina);
+        this.goals = goals;
+        this.shotOnTarget = shotOnTarget;
+    }
+    @Override
+    public void calculatePerformance() {
+        performance = (double)goals/shotOnTarget;
+        System.out.println("Performance: " + performance);
+    }
+    public void display() {
+        super.display();
+        System.out.printf("Goals: %d\nShots on target: %d\n",goals,shotOnTarget);
+    }
+
+}
+
+package Task4;
+
+class Mobile {
+    public String model;
+    public String IMEICode;
+    public boolean simCardStatus;
+    
+    public Mobile(String model, String IMEICode, boolean simCardStatus) {
+      this.model = model;
+      this.IMEICode = IMEICode;
+      this.simCardStatus = simCardStatus;
+      System.out.println("Model " + model + " is manufactured.");
+    }
+      
+    public String getCountryName(String countryCode) {
+      if (countryCode.equals("880")) {
+        return "Bangladesh";
+      } else if (countryCode.equals("455")) {
+        return "USA";
+      }
+      return null;
+    }
+      
+    public void activateSimCard() {
+      if (!simCardStatus) {
+        simCardStatus = true;
+        System.out.println("SIM card is activated successfully.");
+      }
+    }
+    
+    @Override
+    public String toString() {
+      return "Mobile Phone Detail:\nModel: " + model + "\nIMEICode: " + IMEICode + "\nSIM Card Status: " + simCardStatus;
+    }
+  }
+  
+package Task4;
+
+public class MobileTester {
+    public static void main(String[] args) {
+      Nokia N3110 = new Nokia("N3110", true, "IMEI-102", 0);
+      System.out.println(N3110);  
+      System.out.println("1========================");
+      Nokia N1100 = new Nokia("N1100", false, "IMEI-124", 100);
+      System.out.println(N1100);
+      System.out.println("2========================");
+      System.out.println(N3110.dialCall("88017196xxxx"));
+      System.out.println("3========================");
+      N3110.rechargeSIMCard(200);
+      N1100.rechargeSIMCard(300);
+      System.out.println("4========================");
+      System.out.println(N3110.dialCall("88017196xxxx"));
+      System.out.println("5========================");
+      System.out.println(N1100.dialCall("45517196xxxx"));
+      System.out.println("6========================");
+      N1100.activateSimCard();
+      System.out.println("7========================");
+      System.out.println(N1100.dialCall("45517196xxxx"));
+      System.out.println("8========================");
+      System.out.println(N1100.dialCall("96617196xxxx"));
+    }
+  }
+  
+package Task4;
+
+public class Nokia extends Mobile{
+    public int balance;
+
+    public Nokia(String model,boolean status,String imei,int balance) {
+        super(model,imei,status);
+        this.balance = balance;
+    }
+    @Override
+    public String toString() {
+        return String.format("%sBalance: %.1f TK", super.toString(),(double)balance);
+    }
+    public String dialCall(String num) {
+        String region = getCountryName(num.substring(0,3));
+        if(region==null){
+            return "Dialing is not allowed in this region.";
+        }
+        if(!simCardStatus) {
+            return "No SIM card available! Please check the SIM card connectivity.";
+        }
+        if(balance!=0) {
+
+            return String.format("Dialing the number %s to %s region",num,region);
+        }
+        return "Insufficient balance! Please recharge.";
+    }
+    public void rechargeSIMCard(int balance) {
+        this.balance +=balance;
+        System.out.printf("Recharge successful! Current balance %.1f TK.\n",(double)this.balance);
+    }
+    public void activateSimCard() {
+        if(!simCardStatus) {
+            simCardStatus=true;
+            System.out.println("SIM card is activated successfully.");
+            return;
+        }
+        System.out.println("SIM card is already activated.");
+    }
+}
+
+//Task05
+
+package Task5;
+
+public class Dragon extends MagicalCreature{
+    public int power;
+    public Dragon(String name, int age, int power) {
+        super(name,age);
+        this.power=power;
+    }
+    @Override
+    public void makeSound() {
+        System.out.printf("%s roars with a fiery breath!\n",name);
+    }
+    @Override
+    public void performMagic() {
+        System.out.printf("%s breathes fire with power level: %d\n",name,power);
+    }
+    public void fly() {
+        System.out.printf("%s flies through the sky.\n",name);
+    }
+}
+
+package Task5;
+
+public class MagicalCreature {
+    public String name;
+    public int age;
+    public MagicalCreature(String name, int age) {
+    this.name = name;
+    this.age = age;
+    }
+    public void makeSound() {
+    System.out.println(name + " makes a magical sound.");
+    }
+    public void displayInfo() {
+    System.out.println("Name: " + name + "\nAge: " + age);
+    }
+    public void performMagic() {
+    System.out.println(name + " performs a generic magic.");
+    }
+    }
+
+package Task5;
+
+public class MagicalTester {
+    public static void main(String[] args) {
+    Dragon drake = new Dragon("Drake", 500, 75);
+    Phoenix fawkes = new Phoenix("Fawkes", 200, 5);
+    drake.displayInfo();
+    drake.makeSound();
+    drake.performMagic();
+    drake.fly();
+    System.out.println("=====================");
+    fawkes.displayInfo();
+    fawkes.makeSound();
+    fawkes.performMagic();
+    fawkes.regenerate();
+    }
+    }
+
+package Task5;
+
+public class Phoenix extends MagicalCreature{
+    public int rebirth;
+    public Phoenix(String name, int age, int rebirth) {
+        super(name,age);
+        this.rebirth = rebirth;
+    }
+    @Override
+    public void makeSound() {
+        System.out.printf("%s sings an enchanting song.\n",name);
+    }
+    @Override
+    public void performMagic() {
+        System.out.printf("%s is reborn with %d rebirth cycles\n",name,rebirth);
+    }
+    public void regenerate() {
+        rebirth++;
+        System.out.println("Fawkes regenerates its body in a burst of flames.");
+    }
+}
+
+
+//Task06
+
+package Task6;
+
+public class Bondhus extends SocialMedia{
+    public int index;
+    String[] messages = new String[5];
+    public Bondhus(String name,String email) {
+        super(name,email);
+    }
+    public void sendMessage(String msg) {
+        if(index<=messages.length-1) {
+            messages[index++] = msg;
+            return;
+        }
+        System.out.println("Sentbox is full.");
+    }
+    public void showSentbox() {
+        System.out.printf("%s's Sendbox\n",userName);
+        if(index==0) {
+            System.out.println("No sent messages.");
+            return;
+        }
+        for(int i = 0;i<index;i++) {
+            System.out.println(messages[i]);
+        }
+    }
+    @Override
+    public String toString() {
+        return String.format("%s\nMessages Sent: %d\n",super.toString(),index);
+
+    }
+}
+
+package Task6;
+
+public class SocialMedia{
+    public String userName;
+    public String email;
+    
+    public SocialMedia(String name, String mail){
+      userName = name;
+      email = mail;
+    }
+    @Override
+    public String toString() {
+      return userName + "'s profile:"+ "\nUser Name: " + userName + "\nEmail:" + email;
+    }
+  }
+  
+package Task6;
+
+public class SocialMediaTester{
+    public static void main(String []args){
+      Bondhus f1 = new Bondhus("Sheldon", "sheldon@qmail.com");
+      Bondhus f2 = new Bondhus("Penny", "penny@qmail.com");
+      Bondhus f3 = new Bondhus("Leonard", "leonard@qmail.com");
+      System.out.println("1----------------------------");
+      f1.showSentbox();
+      System.out.println("2----------------------------");
+      f2.showSentbox();
+      System.out.println("3----------------------------");
+      f2.sendMessage("Hi");
+      f2.sendMessage("Hello");
+      f2.sendMessage("NiHao");
+      f3.sendMessage("Hola");
+      f3.sendMessage("Sheldon, please.");
+      System.out.println("4----------------------------");
+      f2.showSentbox();
+      System.out.println("5----------------------------");
+      f1.showSentbox();
+      System.out.println("6----------------------------");
+      f1.sendMessage("Bazinga!");
+      f2.sendMessage("Well, duh!");
+      f3.showSentbox();
+      System.out.println("7----------------------------");
+      f2.showSentbox();
+      f2.sendMessage("Bye.");
+      f2.sendMessage("Oh! No");
+      System.out.println("8----------------------------");
+      f1.showSentbox();
+      System.out.println("9----------------------------");
+      System.out.println(f1);
+      System.out.println("10----------------------------");
+      System.out.println(f2);
+    }
+}  
+
+//Task07
+
+package Task7;
+
+public class Fruit{
+    private boolean formalin = false;
+    private String name = "";
+    public Fruit(boolean formalin, String name){
+      this.formalin = formalin;
+      this.name = name; 
+    }   
+    public String getName(){
+      return name;
+    }
+    public boolean hasFormalin(){
+      return formalin;
+    }
+  }
+  
+package Task7;
+
+public class FruitTester{ 
+    public static void testFruit(Fruit f){
+      System.out.println("----Printing Detail-----");
+      if(f.hasFormalin()){   
+        System.out.println("Do not eat the "+f.getName()+".");
+        System.out.println(f);
+      }else{
+        System.out.println("Eat the "+f.getName()+".");
+        System.out.println(f);
+      }
+    } 
+    public static void main(String [] args){
+      Mango m = new Mango();
+      testFruit(m);
+      Jackfruit j = new Jackfruit();
+      testFruit(j);
+    }
+  }
+  
+  package Task7;
+
+public class Jackfruit extends Fruit {
+    public Jackfruit() {
+        super(false,"jackfruit");
+    }
+    @Override
+    public String toString() {
+        if(!super.hasFormalin()) {
+            return String.format("%ss are good for you",super.getName());
+        }
+        return String.format("%ss are bad for you", super.getName());
+    }
+}
+
+package Task7;
+
+public class Mango extends Fruit{
+    public Mango() {
+        super(true,"Mango");
+    }
+    @Override
+    public String toString() {
+        if(!super.hasFormalin()) {
+            return String.format("%ss are good for you",super.getName());
+        }
+        return String.format("%ss are bad for you", super.getName());
+    }
+}
+
+//Task08
+
+package Task8;
+
+public class CSE111Student extends Student{
+    public String msg = "I love Java Programming";
+    @Override
+    public String shout() {
+        return msg;
+    }
+}
+package Task8;
+
+public class CSEStudent extends Student {
+    public String msg = "I want to transfer to CSE";
+    @Override
+    public String shout() {
+        return msg;
+    }
+}
+
+package Task8;
+
+public class Student{
+    public String msg = "I love BU";
+    public String shout(){
+      return msg;
+    }
+  }
+  
+package Task8;
+
+public class StudentTester{
+    public static void printShout(Student s){
+      System.out.println("------------------");
+      System.out.println(s.msg);
+      System.out.println(s.shout());
+    }
+    public static void main(String [] args){
+      Student s = new Student();
+      CSEStudent cs = new CSEStudent();
+      CSE111Student cs111 = new CSE111Student();
+      System.out.println(s.msg);
+      System.out.println(cs.msg);
+      System.out.println(cs111.msg);
+      printShout(s);
+      printShout(cs);
+      printShout(cs111);
+    }
+  }
+  
+//Task09
+
+package Task9;
+
+class Quiz5{
+    public int sum = 12, x = 2, y = 6;
+    public Trace trace;
+    public Quiz5(Trace t){
+      trace = t;
+      int x = trace.temp + y;
+      sum = sum + (t.sum--) + y;
+      System.out.println(trace.sum + " " + sum + " " + x);
+      sum -= 10;
+    }
+    public void methodA(int sum, int temp){
+      sum = 3 + sum - trace.sum;
+      x = sum + 12 + y;
+      y = trace.temp + temp + sum;
+      this.sum = y + methodB(trace.temp, trace) + trace.temp;
+      System.out.println(sum + " " + y + " " + this.sum);
+    }
+    public int methodB(int x, Trace temp){
+      int sum = x + temp.sum + this.x;
+      temp.temp = sum + this.sum;
+      System.out.println(x + " " + temp.temp + " " + sum);
+      return sum;
+    }
+   }
+   
+package Task9;
+
+public class Tester {
+    public static void main(String[] args) {
+        Trace p = new Trace(3, 4);
+        Quiz5 q = new Quiz5(p);
+        q.methodA(4, 8);
+        q.methodA(5, 10);
+           
+    }
+
+}
+
+package Task9;
+
+public class Trace {
+    public int sum, temp;
+    public Trace(int sum, int temp){
+      this.sum = sum;
+      this.temp = temp;
+    }
+   }
+   
+   

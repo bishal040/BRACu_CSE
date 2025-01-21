@@ -1,0 +1,679 @@
+
+//Task 01
+
+import java.util.Scanner;
+public class Task01{
+    public static void main(String[] args)
+    {
+        int[] array =takeInput(10);
+        //printArray(array);
+        resultArray(array);
+    }
+    public static void resultArray(int[] arr)
+    {
+        int sum=0,min=arr[0],max=arr[0],count=0;
+        boolean flag =true;
+        for(int i=0;i<arr.length;i++)
+        {
+        if(arr[i]<0 || arr[i]%2==0)
+        continue;
+        else
+        {
+            count++;
+            while(flag)
+            {
+            if(arr[i]%2!=0)
+                {
+                 flag = false;
+                }
+            }
+            if(count==0)
+            {
+                System.out.println("No odd positive numbers found");
+            }
+            else
+            {
+                sum+=arr[i];
+                if(min<arr[i])
+                {
+                    min=min;
+                }
+                else
+                {
+                    min=arr[i];
+                }
+                if(max>arr[i])
+                {
+                    max=max;
+                }
+                else
+                {
+                    max=arr[i];
+                }
+
+            }
+        }
+        }
+        double avg=(double)sum/count;
+        if(count==0)
+        System.out.println("No odd positive numbers found");
+        else{
+        System.out.println("Sum = " + sum);
+        System.out.println("Minimum = " + min);
+        System.out.println("Maximum = " + max);
+        if(flag)
+        System.out.println("No odd positive numbers found");
+        else
+        {
+            System.out.println("Average = " + avg);
+        }
+        }
+    }
+    public static int[] takeInput(int num)
+    {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[num];
+        System.out.println("Enter the number:");
+        for(int i=0;i<num;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        return arr;
+    }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 02
+
+import java.util.Scanner;
+public class Task02 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num1 = sc.nextInt();
+        int num2 = sc.nextInt();
+        sc.close();
+        primeInBetween(num1,num2);
+    }
+
+   public static void primeInBetween(int n1 , int n2)
+    {
+        int max=0,min=0,primeCount=0;
+        if(n1>n2)
+        {
+            max=n1;
+            min=n2;
+        }
+        else if(n1<n2)
+        {
+            max=n2;
+            min=n1;
+        }
+        for(int i=min;i<=max;i++)
+        {
+            int count=0;
+            for(int j=1;j<=i;j++)
+            {
+                if(i%j==0)
+                {
+                    count++;
+                }
+
+            }
+            if(count==2)
+            {
+                primeCount++;
+            }
+
+        }
+        System.out.println("There are " + primeCount + " prime numbers between " + min +" and "+ max +".");
+    }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 03
+
+import java.util.Scanner;
+public class Task03{
+  public static void main(String [] args)
+  {
+    char c;
+    int result = 0;
+    Scanner sc = new Scanner(System.in);
+    String str = sc.nextLine();
+    String str1 = sc.nextLine();
+    sc.close();
+    String C_str = str + " " + str1;
+    String C1_str = str + " " + str1;
+    System.out.println(C_str);
+    String str_won = new String(C1_str); 
+      for(int i = 0; i<str_won.length(); i++)
+      {
+       c = str_won.charAt(i);
+         if(c>=65 && c<=90 || c>=97 && c<=122)
+       {
+        result += (int)c;
+       }
+      }
+      System.out.println(result);
+  }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 04
+
+import java.util.Scanner;
+public class Task04{
+public static void main(String[] args)
+{
+  char c ;
+  String result ="" ;
+ Scanner sc = new Scanner(System.in);
+ String str = sc.nextLine();
+ //String str = new String(sc.nextLine());
+ sc.close();
+ for(int i=0; i<str.length();i++)
+ {
+   c = str.charAt(i);
+   if(c == 'a')
+   {
+   result += (char)(c-1+26);
+   }
+   else
+   {
+     result +=(char)(c-1);
+   }
+ }
+ System.out.println(result);
+}
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 05
+
+import java.util.Scanner;
+
+public class Task05 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the length of the array: ");
+        int num = sc.nextInt();
+        int[] array =takeInput(num);
+        printRevArray(array);  
+    }
+
+    public static int[] takeInput(int num) {
+
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[num];
+        for(int i=0;i<num;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        return arr;
+    }
+
+    public static void printArray(int[] array) {
+
+        for(int i=0;i<array.length;i++)
+        {
+            System.out.print(array[i]+" ");
+        }
+    }
+
+    public static void printRevArray(int[] arr) {
+
+        if(arr.length%2==0)
+        {
+            for(int i=0;i<=arr.length/2;i++)
+                {
+                    
+                    int temp = arr[i];
+                    arr[i]=arr[arr.length-1-i];
+                    arr[arr.length-1-i]=temp;
+                }       
+        }
+        else
+        {
+            for(int i=0;i<arr.length/2;i++)
+            {
+                int temp = arr[i];
+                arr[i]=arr[arr.length-1-i];
+                arr[arr.length-1-i]=temp;
+            } 
+        }
+        printArray(arr);
+    }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 06
+
+import java.util.Scanner;
+public class Task06 {
+    public static void main(String[] args) {
+       
+        Scanner sc = new Scanner(System.in);
+        System.out.print("N = ");
+        int num = sc.nextInt();
+        int[] array = takeInput(num);
+        boolean[] boolArray = new boolean[array.length];
+        for(int i = 0; i< array.length ; i++)
+        {
+           int count = 0;
+            for(int j = i; j< array.length ; j++)
+            {
+                if(!boolArray[j])
+                {
+                    if(array[i]==array[j])
+                    {
+                    count++;
+                    boolArray[j]=true;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if(count!=0)
+            System.out.println(array[i] + " - " + count + " times");
+        }
+    }
+    public static int[] takeInput(int num)
+    {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[num];
+        for(int i=0;i<num;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        return arr;
+    }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 07
+
+import java.util.Scanner;
+
+public class Task07 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("N = ");
+        int N = sc.nextInt();
+        double[] arr = takeArrayInput(N);
+        double[] arr2 = uniqueArray(arr);
+        newArray(arr2);
+        sc.close();
+    }
+    
+    public static double[] takeArrayInput(int num) {
+        Scanner sc = new Scanner(System.in);
+        double[] array = new double[num];
+        System.out.println("Please enter the elements of the array: ");
+        for (int i = 0; i < array.length; i++) {
+            array[i] = sc.nextDouble();
+        }
+        return array;
+    }
+
+    public static void printArray(double[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+    }
+
+    public static double[] uniqueArray(double[] arr) {
+        boolean[] arraybool = new boolean[arr.length];
+        double[] arr2 = new double[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!arraybool[i]) {
+                for (int j = i; j < arr.length; j++) {
+                    if (arr[i] == arr[j]) {
+                        arr2[i] = arr[i];
+                        arraybool[j] = true;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        return arr2;
+    }
+
+    public static int removedValue(double[] arr) {
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void newArray(double[] arr) {
+        int count = removedValue(arr);
+        int pcount = 0;
+        double[] newArr = new double[arr.length - count];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                newArr[pcount] = arr[i];
+                pcount++;
+            }
+        }
+
+        System.out.print("New Array: ");
+        printArray(newArr);
+        System.out.println("");
+        System.out.println("Removed elements: " + count);
+    }
+}
+
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 08
+
+import java.util.Scanner;
+public class Task08 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("row = ");
+        int row = sc.nextInt();
+        System.out.print("column = ");
+        int column = sc.nextInt();
+        int[][] array2D = take2DInput(row,column);
+        print2DArray(array2D);
+        System.out.println("");
+        int[] array1D = convert1Dto2D(array2D);
+        print1DArray(array1D);
+    }
+
+    public static int[][] take2DInput(int r,int c)
+    {
+        Scanner sc = new Scanner(System.in);
+        int[][] arr = new int[r][c];
+        for(int i = 0; i<arr.length;i++)
+        {
+            for(int j = 0;j<arr[0].length;j++)
+            {
+                arr[i][j]=sc.nextInt();
+
+            }
+        }
+        return arr;
+    }
+
+    public static void print2DArray(int[][] arr){
+        System.out.println("2D Array:");
+        for(int i = 0; i <arr.length;i++)
+        {
+            for(int j = 0; j<arr[0].length;j++)
+            {
+                System.out.print(arr[i][j] + " ");
+            }
+        System.out.println("");
+        }
+    }
+    public static int[] convert1Dto2D(int[][] arr2D){
+        int[] arr1D = new int[arr2D.length*arr2D[0].length];
+        for(int i = 0; i< arr2D.length;i++)
+        {
+            for(int j = 0;j<arr2D[i].length;j++)
+            {
+                arr1D[i*arr2D[i].length+j]=arr2D[i][j];
+            }
+        }
+        return arr1D;
+    }
+        public static void print1DArray(int[] array){
+        System.out.println("1D Array: ");
+        for(int i=0;i<array.length;i++)
+        {
+            System.out.print(array[i]+" ");
+        }
+    }
+}
+
+——————————————————————————————————————-----------------------------------------------
+
+//Task 09
+
+public class Task09 {
+    public static void main(String[] args) {
+        int [ ] [ ] A = {{1, 0, 0, 1},
+                        {0, 1, 0, 0},
+                        {1, 0, 1, 0},
+                        {0, 1, 0, 1}};
+        // int [ ] [ ] A = {{1, 0, 0},
+        //                 {0, 1, 0},
+        //                 {0, 0, 1}};
+    identityMatrix(A);
+    }
+    public static void identityMatrix(int[][] arr)
+    {
+        boolean flag = true;
+        for(int i = 0; i<arr.length ; i++)
+        {
+            for(int j = 0; j<arr.length ; j++)
+            {
+                
+                if(i==j && arr[i][j]!=1)
+                {
+                    flag = false;
+                }
+                if( i!=j && arr[i][j]!=0)
+                {
+                    flag = false;
+                }
+
+                if(!flag)
+                {
+                    break;
+                }
+            }
+        }
+        if(flag)
+        {
+            System.out.println("Identity Matrix");
+        }
+        else
+        {
+            System.out.println("Not an Identity Matrix");
+        }
+    }
+}
+
+
+------------------------------------------------------------------------------
+
+//Task 10
+
+import java.util.Scanner;
+public class Task10{
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int [][] arr2D = {{0, 0, 10, 0, -1},
+                      {0, -1, 0, 0, -1},
+                      {-1, 0, -1, 0, 0},
+                      {0, -1, 7, 0, -1},
+                      {0, -1, 0, -1, 0}};
+    System.out.println("Initial Map:");
+    printMap(arr2D);
+    int row = arr2D.length;
+    int col = arr2D[0].length;
+    int row_pos = -1, col_pos = -1;
+    for(int i = 0;i<row;i++)
+    {
+      for(int j = 0; j< col;j++)
+      {
+        if(arr2D[i][j]==7)
+        {
+          row_pos = i;
+          col_pos = j;
+          break;
+        }
+      }
+    }
+    int new_row = row_pos, new_col = col_pos;
+    int turns = 5;
+    while (turns > 0) {
+      System.out.printf("Enter move %d: ",(6-turns));
+      String inp = sc.nextLine();
+      if(inp.equals("RIGHT") || inp.equals("right"))
+      { if(new_col==col-1)
+        {
+          System.out.println("Player fell outside the playing area. Game over!");
+          break;
+        }
+        else
+        {
+          new_col++;
+        }
+        if(arr2D[new_row][new_col]==-1)
+        {
+          System.out.println("Player stepped on mine. Game Over!");
+          break;
+        }
+        else if(arr2D[new_row][new_col]==10)
+        {
+          System.out.println("Treasure found. You win!");
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row][new_col-1]=0;
+          System.out.println("Final state:");
+          printMap(arr2D);
+          break;
+        }
+        else
+        {
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row][new_col-1]=0;
+        }
+      }
+      else if(inp.equals("LEFT") || inp.equals("left"))
+      {
+        if(new_col==0)
+        {          
+          System.out.println("Player fell outside the playing area. Game over!");
+          break;
+        }
+        else
+        {
+          new_col--;
+        }
+         if(arr2D[new_row][new_col]==-1)
+        {
+          System.out.println("Player stepped on mine. Game Over!");
+          break;
+        }
+        else if(arr2D[new_row][new_col]==10)
+        {
+          System.out.println("Treasure found. You win!");
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row][new_col+1]=0;
+          System.out.println("Final state:");
+          printMap(arr2D);
+          break;
+        }
+        else
+        {
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row][new_col+1]=0;
+        }
+      }
+      else if(inp.equals("UP") || inp.equals("up"))
+      {
+        if(new_row==0)
+        {
+          System.out.println("Player fell outside the playing area. Game over!");
+          break;
+        }
+        else
+        {
+          new_row--;
+        }
+        if(arr2D[new_row][new_col]==-1)
+        {
+          System.out.println("Player stepped on mine. Game Over!");
+          break;
+        }
+        else if(arr2D[new_row][new_col]==10)
+        {
+          System.out.println("Treasure found. You win!");
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row+1][new_col]=0;
+          System.out.println("Final state:");
+          printMap(arr2D);
+          break;
+        }
+        else
+        {
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row+1][new_col]=0;
+        }
+      }
+      else if(inp.equals("DOWN") || inp.equals("down"))
+      {
+        if(new_row==row-1)
+        {
+          System.out.println("Player fell outside the playing area. Game over!");
+          break;
+        }
+        else
+        {
+          new_row++;
+        }
+        if(arr2D[new_row][new_col]==-1)
+        {
+          System.out.println("Player stepped on mine. Game Over!");
+          break;
+        }
+        else if(arr2D[new_row][new_col]==10)
+        {
+          System.out.println("Treasure found. You win!");
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row-1][new_col]=0;
+          System.out.println("Final state:");
+          printMap(arr2D);
+          break;
+        }
+        else
+        {
+          arr2D[new_row][new_col]=7;
+          arr2D[new_row-1][new_col]=0;
+        }
+       
+      }
+      else
+      {
+        System.out.println("Wrong Input!Start Again...");
+        break;
+      }
+      System.out.println("Current state:");
+      printMap(arr2D);
+      turns--;
+    }
+    if (turns == 0) {
+      System.out.println("Failed to find the treasure.");
+    }
+  }
+  public static void printMap(int[][] arr2D)
+    {
+    for(int i = 0;i<arr2D.length;i++)
+    {
+      for(int j = 0; j< arr2D[0].length; j++)
+      {
+          System.out.print(arr2D[i][j] + " ");
+      }
+      System.out.println("");
+    }
+  }
+}
