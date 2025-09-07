@@ -1,0 +1,151 @@
+//Task 01
+public static void mostWater( Integer[] height ){
+        int maxarea =0,temparea=0;;
+        int idxL= 0,idxR = height.length-1;
+        //Approach one
+        while(true){
+            if(height[idxL]<height[idxR]){
+                    if(idxL<idxR){
+                        temparea =(idxR-idxL)*height[idxL];
+                    }
+                    else{
+                        temparea =(idxL-idxR)*height[idxL];
+                    }
+                }
+                else{
+                    if(idxL<idxR){
+                        temparea =(idxR-idxL)*height[idxR];
+                    }
+                    else{
+                        temparea =(idxL-idxR)*height[idxR];
+                    }
+                }
+                if(maxarea<temparea){
+                    maxarea=temparea;
+                }
+                if(height[idxL]<height[idxR]){
+                    idxL++;
+                }
+                else{
+                    idxR--;
+                }
+                if(idxL>=idxR){
+                    break;
+                }
+        }
+        System.out.println(maxarea);
+
+        /*
+        //Approach two
+        int maxvol=0,tempvol=0;
+        for(int i=0;i<height.length;i++){
+            for(int j=0;j<height.length;j++){
+                if(height[i]<height[j]){
+                    if(i<j){
+                        tempvol =(j-i)*height[i];
+                    }
+                    else{
+                        tempvol =(i-j)*height[i];
+                    }
+                }
+                else{
+                    if(i<j){
+                        tempvol =(j-i)*height[j];
+                    }
+                    else{
+                        tempvol =(i-j)*height[j];
+                    }
+                }
+                if(maxvol<tempvol){
+                    maxvol=tempvol;
+                }
+            }
+        }
+        System.out.println(maxvol);
+        */   
+    }
+_____________________________________________________________
+
+//Task 02
+
+public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+        int rowCount=0,rowIndex=0;
+        for(String[] row : matrix){
+           rowCount++;
+            for(String element: row){
+                if(element.equals("AA")){
+                    rowIndex=rowCount;
+                    break;
+                }
+
+            }
+        }
+        for(int i=0;i<examWeek-1;i++){
+            String[] temp = matrix[matrix.length-1];
+            for(int j=matrix.length-2;j>=0;j--){
+                matrix[j+1] =matrix[j];
+            }
+            matrix[0]=temp;
+        }
+        Arr.print2D(matrix);
+        
+        if(rowIndex+(examWeek-1)>matrix.length)
+            return rowIndex+(examWeek-1)-matrix.length;
+            else{
+        return rowIndex+(examWeek-1);
+            }
+    }
+_____________________________________________________________
+
+//Task 03
+
+ public static Integer[][] compressMatrix( Integer[][] matrix ){
+        Integer[][] c_matrix = new Integer[(int)Math.sqrt(matrix.length)][(int)Math.sqrt(matrix.length)];
+        for(int i=0;i<c_matrix.length;i++){
+            for(int j=0;j<c_matrix.length;j++){
+                c_matrix[i][j]=0;
+                for(int k=0+i*c_matrix.length;k<(int)(i+1)*(matrix.length/c_matrix.length);k++){
+                    for(int l=0+j*c_matrix.length;l<(int)(j+1)*(matrix.length/c_matrix.length);l++){
+                        c_matrix[i][j] +=matrix[k][l];
+                    }
+                }
+            }
+        }
+        return c_matrix;
+    }
+_____________________________________________________________
+
+//Task 04
+
+public static void playGame( Integer[][] arena ){
+        int point = 0;
+        for(int i=0;i<arena.length;i++){
+            for(int j=0;j<arena[0].length;j++){
+                if(arena[i][j]==50||arena[i][j]==100 ||arena[i][j]==200){
+                  //right  [i][j+1]
+                  if(j+1<=arena[0].length-1 && arena[i][j+1]==2){
+                    point++;
+                  }
+                  //left   [i][j-1]
+                  if(j-1>=0 && arena[i][j-1]==2){
+                    point++;
+                  }
+                  //down     [i+1][j]
+                  if(i+1<=arena.length-1 && arena[i+1][j]==2){
+                    point++;
+                  }
+                  //up   [i-1][j]
+                  if(i-1>=0 && arena[i-1][j]==2){
+                    point++;
+                  }   
+                }
+            }
+        }
+        point = point*2;
+        if(point>=10){
+                System.out.printf("Points Gained: %d. Your team has survived the game.\n",point);
+            }
+            else{
+                System.out.printf("Points Gained: %d. Your team is out.\n",point);
+            }
+    }

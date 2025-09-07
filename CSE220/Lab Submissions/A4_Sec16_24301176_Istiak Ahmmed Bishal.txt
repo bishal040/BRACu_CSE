@@ -1,0 +1,74 @@
+// Task01
+
+public void remove( Integer key ){
+        int idx = hashFunction(key);
+        PairNode curr = ht[idx];
+        PairNode temp = null;
+        while(curr != null ){
+            if(curr.key.equals(key)){
+                break;
+            }
+            temp = curr;
+            curr = curr.next;
+        }
+        if(curr==null){
+            return;
+        }
+        if(temp == null)
+        {
+            ht[idx] = curr.next;
+        }
+        else{
+            temp.next = curr.next;
+        }
+    }
+
+________________________________________________________
+
+// Task02
+
+public static int diamondCount(Stack stack, String str) {
+        int count = 0;
+        for(int i = 0; i<str.length(); i++){
+            if(str.charAt(i)=='<'){
+                stack.push(str.charAt(i));
+            }
+            if(str.charAt(i)=='>'){
+                if(!stack.isEmpty()){
+                    stack.pop();
+                    count++;
+                }
+            }
+        }
+        return count; 
+    }
+
+________________________________________________________
+
+// Task03
+
+public static String removeConsecDups(String word){
+        String result = "";
+	LinkedListQueue queue = new LinkedListQueue();
+    for(int i = 0; i<word.length(); i++){
+        queue.enqueue(word.charAt(i));
+    }
+    boolean flag = false;
+    while(!queue.isEmpty()){
+        char curr = (char)queue.dequeue();
+        if(result==""){
+            result += curr;
+        }
+        else{
+            if(result.charAt(result.length()-1)==curr){
+                flag = true;
+            }
+            if(!flag){
+                result += curr;
+            }
+            flag = false;
+        }
+
+    }
+	return result; 
+    }

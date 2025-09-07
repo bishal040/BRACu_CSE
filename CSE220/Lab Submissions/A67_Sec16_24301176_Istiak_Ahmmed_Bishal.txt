@@ -1,0 +1,166 @@
+//Lab06
+public class Task4 {
+
+    //===================================TASK#4===================================
+    // This method takes only 3 parameters
+    // 1st one is root of the given tree
+    // 2nd one is there to help you count the levels
+    // 3rd one is the level TILL which you need to swap childs
+    // All the changes will happen in-place
+    // This method doesn't return anything
+    // You can use extra helper private static methods as per need
+    public static void swapChild( BTNode root, int lvl, int M ){
+        BTNode temp = null;
+        if(root==null)return;
+        if(lvl<M){
+            temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+        swapChild(root.left, lvl+1, M);
+        swapChild(root.right, lvl+1, M);
+    }
+    //============================================================================
+}
+
+public class Task5 {
+    //===================================TASK#5===================================
+    // This method takes only 1 parameter which is root of the given tree
+    // This method returns an Integer
+    // At times you may need to typeCast root.elem to Integer
+    // You can use extra helper private static methods with extra extra params as per need
+    public static Integer subtractSummation( BTNode root ){
+        return Math.abs(subTreeSumHelper(root.left)-subTreeSumHelper(root.right));
+    }
+    public static Integer subTreeSumHelper(BTNode root){
+        if(root == null)return 0;
+        return (Integer)root.elem + subTreeSumHelper(root.left)+subTreeSumHelper(root.right);
+    }
+    //============================================================================
+
+}
+public class Task6 {
+
+    //===================================TASK#6===================================
+    // This method takes only 1 parameter which is root of the given tree
+    // This method returns an Integer
+    // At times you may need to typeCast root.elem to Integer
+    // You can use extra helper private static methods with extra extra params as per need
+    public static Integer levelSum( BTNode root ){
+        
+        return levelSum_helper(root,0,0);
+    }
+    public static Integer levelSum_helper(BTNode root, int lvl,int sum){
+        if(root == null)return 0;
+        if(lvl%2==0){
+            return (Integer)sum-(Integer)root.elem +  levelSum_helper(root.left, lvl+1, sum) + levelSum_helper(root.right, lvl+1, sum);
+        }
+        else{
+            
+            return (Integer)sum+(Integer)root.elem +  levelSum_helper(root.left, lvl+1, sum) + levelSum_helper(root.right, lvl+1, sum);
+        }
+    }
+    //============================================================================
+
+}
+
+//Lab07
+
+//Assignment Task (must Submit)
+// Complete the rangeSum method
+public class Task4 {
+
+    //===================================TASK#4======================
+    // This method takes only three parameters
+    // first one is the root of the given tree
+    // second one the low range and third one is high range
+    // You can use extra helper private static methods as per need
+    public static Integer rangeSum( BSTNode root, Integer low, Integer high ){
+        if (root == null) {
+            return 0;
+        }
+        int sum = 0;
+        if (root.elem >= low && root.elem <= high) {
+            sum += root.elem;
+        }
+        if (root.elem > low) {
+            sum += rangeSum(root.left, low, high);
+        }
+        if (root.elem < high) {
+            sum += rangeSum(root.right, low, high);
+        }
+        return sum;
+    }
+    //===============================================================
+}
+
+//Assignment Task (must Submit)
+// Complete the sumOfLeaves method
+public class Task5 {
+    //===================================TASK#5======================
+    // This method takes only one parameter
+    // it is root of the given tree
+    // You can use extra helper private static methods as per need
+    public static Integer mirrorSum( BSTNode root ){
+        return mirrorSum_helper(root.left, root.right);
+    }
+    //===============================================================   
+    public static Integer mirrorSum_helper(BSTNode root1, BSTNode root2){
+        if(root1 == null || root2 == null){
+            return 0;
+        }
+        int sum = root1.elem + root2.elem;
+        int leftSum = mirrorSum_helper(root1.left, root2.right);
+        int rightSum = mirrorSum_helper(root1.right, root2.left);
+        sum += leftSum + rightSum;
+        return sum;
+    }
+}
+
+//Assignment Task (must Submit)
+// Complete the isBST method
+public class Task6 {
+    //===================================TASK#6======================
+    // This method takes only one parameter
+    // it is root of the given tree
+    // You can use extra helper private static methods as per need
+    public static Boolean isBST( BSTNode root ){
+       return isBST_helper(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    //     if(root.left== null && root.right == null ) return true;
+    //     else if(root.left == null){
+    //         if(root.elem < root.right.elem){
+    //             return true && isBST(root.right);
+    //         }
+    //         else{
+    //             return false;
+    //         }
+    //     }
+    //     else if(root.right == null){
+    //         if(root.elem > root.left.elem){
+    //             return true && isBST(root.left);
+    //         }
+    //         else{
+    //             return false;
+    //         }
+    //     }
+    //    else{
+    //     if(root.elem > root.left.elem && root.elem < root.right.elem){
+    //         return true && isBST(root.left) && isBST(root.right);
+    //     }
+    //     else return false;
+    //    }
+     }
+     public static Boolean isBST_helper(BSTNode root, int min_value, int max_value){
+        if(root == null){
+            return true;
+        }
+        if(root.elem < min_value || root.elem > max_value){
+            return false;
+        }
+        boolean leftCheck = isBST_helper(root.left, min_value, root.elem);
+        boolean rightCheck = isBST_helper(root.right, root.elem, max_value);
+        return leftCheck && rightCheck;
+     }
+    //===============================================================
+}
+

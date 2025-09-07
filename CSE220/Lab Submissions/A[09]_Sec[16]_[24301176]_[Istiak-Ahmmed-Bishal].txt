@@ -1,0 +1,303 @@
+//Edge.java
+public class Edge {
+    int from;
+    int to;
+    int weight;
+    Edge next;
+    public Edge(int from, int to, int weight){
+        this.from = from;
+        this.to = to;
+        this.weight = weight;
+        this.next = null;
+    }
+}
+//Graph.java
+public class Graph{
+    int vertex;
+    int[][] graph;
+    Edge[] adjList;
+    public Graph(int vertex){
+        this.vertex = vertex;
+        graph = new int[vertex][vertex];
+        adjList = new Edge[vertex];
+    }
+    //directed_add_node method for Adjacency Matrix
+    public void directed_add_node_matrix(int row, int col, int weight){
+        graph[row][col] = weight;
+    }
+    //unDirected_add_node method for Adjacency Matrix
+    public void unDirected_add_node_matrix(int row, int col, int weight){
+        graph[row][col] = weight;
+        graph[col][row] = weight;
+    }
+    //directed_add_node method for Adjacency List
+    public void directed_add_node_list(int from, int to, int weight){
+        Edge newEd = new Edge(from, to, weight);
+        if(adjList[from]==null){
+            adjList[from] = newEd;
+        }
+        else{
+            Edge temp = adjList[from];
+            while(temp.next!=null){
+                temp = temp.next;
+            }
+            temp.next = newEd;
+        }
+    }
+    //unDirected_add_node method for Adjacency List
+    public void unDirected_add_node_list(int from, int to, int weight){
+        if(!edgeExists(this.adjList[from], to, weight)){
+            directed_add_node_list(from, to, weight);
+        }
+        if(!edgeExists(this.adjList[to], from, weight)){
+            directed_add_node_list(to, from, weight);
+        }
+    }
+    //Print 2D Array
+    public static void print2DArray(int[][] arr2D){
+        for(int[] arr: arr2D){
+            System.out.print("[ ");
+            for(int value: arr){
+                System.out.print(value + " ");
+            }
+            System.out.println("]");
+        }
+    }
+    //For printing List
+    public static void printList(Edge[] ed){
+        for(int i=0; i< ed.length; i++){
+            Edge temp = ed[i];
+            System.out.print("Vertex: " + i + " -->");
+            while(temp!=null){
+                System.out.print(" " + temp.to + "(" + temp.weight + ")");
+                temp = temp.next;
+            }
+            System.out.println("");
+        }
+    }
+    //Find Max Degree
+    public int findMaxDegree(int[][] graph){
+        int count = 0;
+        int max = Integer.MIN_VALUE;
+        for(int[] arr: graph){
+            for(int value: arr){
+                if(value != 0){
+                    count++;
+                }
+            }
+            if(max < count){
+                max = count;
+            }
+            count = 0;
+        }
+        return max;
+    }
+    //For Finding Degree with Adjacency List
+    public int findMaxDegreeList(Edge[] ed){
+        int count = 0;
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<ed.length; i++){
+            Edge temp = ed[i];
+            while(temp!=null){
+                count++;
+                temp=temp.next;
+            }
+            if(max<count){
+                max = count;
+            }
+            count = 0;
+        }
+        return max;
+    }
+    //finding maxedge using matrix
+    public int maxEdge(int[][] graph){
+        int sum = 0, max = Integer.MIN_VALUE, maxVertex = -1;
+        for(int i=0; i<graph.length;i++){
+            for(int j=0; j< graph[0].length;j++){
+                if(graph[i][j] != 0){
+                    sum+=graph[i][j];
+                }
+            }
+            if(max<sum){
+                max = sum;
+                maxVertex = i;
+            }
+            sum = 0;
+        }
+        return maxVertex;
+    }
+    //finding maxEdge using List
+    public int maxEdge(Edge[] ed){
+        int sum = 0, max = Integer.MIN_VALUE, maxVertexIndex = -1;
+        for(int i=0; i<ed.length; i++){
+            Edge temp = ed[i];
+            while(temp!=null){
+                sum+= temp.weight;
+                temp = temp.next;
+            }
+            if(max<sum){
+                max = sum;
+                maxVertexIndex = i;
+            }
+            sum = 0;
+        }
+        return maxVertexIndex;
+    }
+    //directed adjacency Graph to undirected adjacency Graph
+    public Graph directToUndirectMatrix(Graph g){
+        Graph undirected = new Graph(g.vertex);
+        for(int i=0; i<g.graph.length; i++){
+            for(int j=0; j<g.graph.length; j++){
+                if(g.graph[i][j]!=0){
+                    int maxWeight = Math.max(g.graph[i][j], g.graph[j][i]);
+                    undirected.unDirected_add_node_matrix(i, j, maxWeight);
+                }
+            }
+        }
+        return undirected;
+    }
+    //directed adjacency List to undirected adjacency List
+    public Graph directToUndirectList(Graph g){
+        Graph unDirected = new Graph(g.vertex);
+        for(int i=0; i<g.adjList.length; i++){
+            Edge temp = g.adjList[i];
+            while(temp != null){
+                unDirected.unDirected_add_node_list(temp.from,temp.to, temp.weight);
+                temp = temp.next;
+            }
+        }
+        return unDirected;
+    }
+    //check for dublicates
+    public boolean edgeExists(Edge head, int to, int weight) {
+        while (head != null) {
+            if (head.to == to && head.weight == weight) return true;
+            head = head.next;
+        }
+    return false;
+    }
+}
+//Tester.java
+public class Tester {
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
+    public static void colorPrint(String str){
+        System.out.println(GREEN + str + RESET);
+    }
+    public static void main(String[] args) {
+    //Undirect Adjacency Matrix
+    Graph unDirectGraph = new Graph(8);
+    // Add Node For Undirected Adjacency Matrix
+    unDirectGraph.unDirected_add_node_matrix(1, 5, 4);
+    unDirectGraph.unDirected_add_node_matrix(1, 4, 3);
+    unDirectGraph.unDirected_add_node_matrix(5, 7, 1);
+    unDirectGraph.unDirected_add_node_matrix(2, 3, 5);
+    unDirectGraph.unDirected_add_node_matrix(3, 5, 2);
+    unDirectGraph.unDirected_add_node_matrix(4, 3, 5);
+    unDirectGraph.unDirected_add_node_matrix(6, 1, 3);
+    unDirectGraph.unDirected_add_node_matrix(2, 4, 1);
+    unDirectGraph.unDirected_add_node_matrix(0, 4, 3);
+    // Add Node For UnDirected Adjacency List
+    unDirectGraph.unDirected_add_node_list(1, 5, 4);
+    unDirectGraph.unDirected_add_node_list(1, 4, 3);
+    unDirectGraph.unDirected_add_node_list(5, 7, 1);
+    unDirectGraph.unDirected_add_node_list(2, 3, 5);
+    unDirectGraph.unDirected_add_node_list(3, 5, 2);
+    unDirectGraph.unDirected_add_node_list(4, 3, 5);
+    unDirectGraph.unDirected_add_node_list(6, 1, 3);
+    unDirectGraph.unDirected_add_node_list(2, 4, 1);
+    unDirectGraph.unDirected_add_node_list(0, 4, 3);
+    //Direct Graph For Adjacency Matrix
+    Graph directGraph = new Graph(8);
+    //Add Node for Directed Adjacency Matrix
+    directGraph.directed_add_node_matrix(1,5,3);
+    directGraph.directed_add_node_matrix(1,4,2);
+    directGraph.directed_add_node_matrix(3,2,4);
+    directGraph.directed_add_node_matrix(4,3,7);
+    directGraph.directed_add_node_matrix(6,7,8);
+    directGraph.directed_add_node_matrix(7,5,2);
+    directGraph.directed_add_node_matrix(1,6,7);
+    directGraph.directed_add_node_matrix(5,2,8);
+    directGraph.directed_add_node_matrix(1,3,3);
+    directGraph.directed_add_node_matrix(3,5,4);
+    directGraph.directed_add_node_matrix(2,7,5);
+    directGraph.directed_add_node_matrix(4,7,4);
+    directGraph.directed_add_node_matrix(0,7,3);
+    directGraph.directed_add_node_matrix(4,6,3);
+    directGraph.directed_add_node_matrix(5,0,7);
+    directGraph.directed_add_node_matrix(2,0,4);
+    //Add Node For Direct Adjacency List
+    directGraph.directed_add_node_list(1,5,3);
+    directGraph.directed_add_node_list(1,4,2);
+    directGraph.directed_add_node_list(3,2,4);
+    directGraph.directed_add_node_list(4,3,7);
+    directGraph.directed_add_node_list(6,7,8);
+    directGraph.directed_add_node_list(7,5,2);
+    directGraph.directed_add_node_list(1,6,7);
+    directGraph.directed_add_node_list(5,2,8);
+    directGraph.directed_add_node_list(1,3,3);
+    directGraph.directed_add_node_list(3,5,4);
+    directGraph.directed_add_node_list(2,7,5);
+    directGraph.directed_add_node_list(4,7,4);
+    directGraph.directed_add_node_list(0,7,3);
+    directGraph.directed_add_node_list(4,6,3);
+    directGraph.directed_add_node_list(5,0,7);
+    directGraph.directed_add_node_list(2,0,4);
+    //Lab Task0A Demostration using Adjacency Matrix
+    colorPrint("<---------------Task0A--------------->");
+    System.out.println("<-----UnDirectedGraph Matrix Simulation----->");
+    Graph.print2DArray(unDirectGraph.graph);
+    //Lab Task1A Demostration using Adjacency Matrix
+    colorPrint("<---------------Task1A--------------->");
+    int maxDegree = unDirectGraph.findMaxDegree(unDirectGraph.graph);
+    System.out.println("Max degree of the Vertex: " + maxDegree);
+    //Lab Task2A Demostration using Adjacency Matrix
+    colorPrint("<---------------Task2A--------------->");
+    int maxVertex= unDirectGraph.maxEdge(unDirectGraph.graph);
+    System.out.println("The Vertex: " + maxVertex + " has max sum of edge.");
+    System.out.println("Using Adjacency List:");
+    //Lab Task0B Demostration using Adjacency List
+    colorPrint("<---------------Task0B--------------->");
+    System.out.println("<-----unDirectedGraph List Simulation----->");
+    Graph.printList(unDirectGraph.adjList);
+    //Lab Task1B Demostration using Adjacency List
+    colorPrint("<---------------Task1B--------------->");
+    int maxDegreeList = unDirectGraph.findMaxDegreeList(unDirectGraph.adjList);
+    System.out.println("Max Degree of the Vertex: " + maxDegreeList);
+    //Lab Task2B Demostration using Adjacency List
+    colorPrint("<---------------Task2B--------------->");
+    int maxVertexList= unDirectGraph.maxEdge(unDirectGraph.adjList);
+    System.out.println("The Vertex: " + maxVertexList + " has max sum of edge.");
+    //Lab Task3A1 Demostration using Adjacency Matrix
+    colorPrint("<---------------Task3A1--------------->");
+    int max_Degree = directGraph.findMaxDegree(directGraph.graph);
+    System.out.println("Max degree of the Vertex: " + max_Degree);
+    //Lab Task3A2 Demostration using Adjacency Matrix
+    colorPrint("<---------------Task3A2--------------->");
+    int max_Vertex= directGraph.maxEdge(directGraph.graph);
+    System.out.println("The Vertex: " + max_Vertex + " has max sum of edge.");
+    //Lab Task3B1 Demostration using Adjacency List
+    colorPrint("<---------------Task3B1--------------->");
+    int max_DegreeList = directGraph.findMaxDegreeList(directGraph.adjList);
+    System.out.println("Max Degree of the Vertex: " + max_DegreeList);
+    //Lab Task3B2 Demostration using Adjacency List
+    colorPrint("<---------------Task3B2--------------->");
+    int max_VertexList= directGraph.maxEdge(directGraph.adjList);
+    System.out.println("The Vertex: " + max_VertexList + " has max sum of edge.");
+    //Lab Task4A Demostration using Adjacency Matrix
+    colorPrint("<---------------Task4A--------------->");
+    System.out.println("<-----DirectedGraph Matrix Simulation before convertion----->");
+    Graph.print2DArray(directGraph.graph);
+    Graph converted_graph_matrix =directGraph.directToUndirectMatrix(directGraph);
+    System.out.println("<-----UnDirectedGraph Matrix Simulation after convertion----->");
+    Graph.print2DArray(converted_graph_matrix.graph);
+    //Lab Task4B Demostration using Adjacency List
+    colorPrint("<---------------Task4B--------------->");
+    System.out.println("<-----DirectedGraph List Simulation before convertion----->");
+    Graph.printList(directGraph.adjList);
+    Graph converted_graph_list = directGraph.directToUndirectList(directGraph);
+    System.out.println("<-----unDirectedGraph List Simulation after convertion----->");
+    Graph.printList(converted_graph_list.adjList);
+    System.out.println("\u001B[32m\n<=============== Assignment Completed ===============>\u001B[0m");
+}
+}
