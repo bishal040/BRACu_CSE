@@ -1,0 +1,8 @@
+There are many other types of tree data strutures like `Radix Tree`, `AVL`, `Trie` etc. We use these trees in our day to day lives without even realizing when or where. Once you're comfortable with `BST` and `Heap` then you should move on and try to implement the other types of trees as well.
+
+Check out the following simulations to play around with few other types of trees.
+1.   [AVL tree simulation](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
+2.   [Patricia Tree simulation](https://blockchain-academy.hs-mittweida.de/patricia-tree-simulator)
+3.   [Radix tree simulation](https://www.cs.usfca.edu/~galles/visualization/RadixTree.html) (Works with alphabetic words only)
+4.   [Trie/Prefix-tree simulation](https://www.cs.usfca.edu/~galles/visualization/Trie.html) (Works with alphabetic words only)
+5.   [Suffix-tree simulation](https://visualgo.net/en/suffixtree) (you'll deal with this in **CSE221**)
